@@ -8,7 +8,7 @@ from urllib.request import urlopen
 from bs4 import BeautifulSoup
 
 class Scraper:
-    def __init__(self, listOfUrls, csvFile):
+    def __init__(self, listOfUrls):
         self.listOfUrls = listOfUrls
         self.csvFile = csvFile
 
@@ -32,7 +32,7 @@ class Main:
         raw_df = pd.DataFrame(pd.read_csv("nytwit_v1-1.tsv", sep='\t'))
         clean_df = raw_df.drop(list(raw_df.loc[raw_df['URL'] == 'not found'].index))
         url_list  = [url for url in clean_df['URL'].values]
-        x = Scraper(listOfUrls=url_list, csvFile=None)
+        x = Scraper(listOfUrls=url_list)
         pick = x.nytScraper(url_list)
         print(pick)
 
